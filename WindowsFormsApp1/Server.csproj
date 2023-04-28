@@ -62,6 +62,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manager\Clientstate.cs" />
+    <Compile Include="Manager\Map.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
