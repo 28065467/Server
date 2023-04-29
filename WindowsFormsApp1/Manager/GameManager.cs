@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,21 @@ namespace Game.Manager
     internal class GameManager
     {
         int boom;
+        Map map;
         List<ClientState> players;
 
-        public int setBoom()
+        public GameManager()
+        {
+            
+            players = new List<ClientState>();
+        }
+
+        public void addPlayers()
+        {
+
+        }
+
+        public int setBoomNum()
         {
             if(players.Count == 4)
             {
@@ -29,6 +42,24 @@ namespace Game.Manager
             }
 
             return boom;
+        }
+
+        public void setBoom(int x, int y)
+        {
+            map.setBoom(x, y);
+        }
+
+        public void endRound()
+        {
+            for(int i = 0; i < players.Count; i++)
+            {
+                int row = players[i].getRow();
+                int col = players[i].getCol();
+                if (map.getMap()[row, col] == true)
+                {
+                    players[i].setGameOver();
+                }
+            }
         }
     }
 }

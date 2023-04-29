@@ -24,6 +24,22 @@ namespace Tile
             ROW = 6; COL = 6;
         }
 
+        public void setBoom(int x, int y)
+        {
+            map[x, y] = true;
+        }
+
+        public void clearBoom()
+        {
+            for(int i = 0; i < ROW; i++)
+            {
+                for(int j = 0; j < COL; j++)
+                {
+                    map[i, j] = false;
+                }
+            }
+        }
+
         public int getROW()
         {
             return ROW;
