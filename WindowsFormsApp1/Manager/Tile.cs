@@ -40,6 +40,11 @@ namespace Tile
             }
         }
 
+        public bool[,] getMap()
+        {
+            return map;
+        }
+
         public int getROW()
         {
             return ROW;

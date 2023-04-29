@@ -17,7 +17,7 @@ namespace Game.Manager
 
         public GameManager()
         {
-            
+            map = new Map();
             players = new List<ClientState>();
         }
 
@@ -60,6 +60,8 @@ namespace Game.Manager
                     players[i].setGameOver();
                 }
             }
+
+            map.clearBoom();
         }
     }
 }
