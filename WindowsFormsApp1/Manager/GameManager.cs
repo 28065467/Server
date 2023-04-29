@@ -11,7 +11,6 @@ namespace Game.Manager
 {
     internal class GameManager
     {
-        int boom;
         Map map;
         List<ClientState> players;
 
@@ -24,24 +23,6 @@ namespace Game.Manager
         public void addPlayers(ClientState player)
         {
             players.Add(player);
-        }
-
-        public int setBoomNum()
-        {
-            if(players.Count == 4)
-            {
-                boom = 3;
-            }
-            else if(players.Count == 3) 
-            {
-                boom = 4;
-            }
-            else if(players.Count == 2)
-            {
-                boom = 5;
-            }
-
-            return boom;
         }
 
         public void setBoom(int x, int y) { map.setBoom(x, y); }
