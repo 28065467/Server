@@ -21,9 +21,9 @@ namespace Game.Manager
             players = new List<ClientState>();
         }
 
-        public void addPlayers()
+        public void addPlayers(ClientState player)
         {
-
+            players.Add(player);
         }
 
         public int setBoomNum()
@@ -44,10 +44,7 @@ namespace Game.Manager
             return boom;
         }
 
-        public void setBoom(int x, int y)
-        {
-            map.setBoom(x, y);
-        }
+        public void setBoom(int x, int y) { map.setBoom(x, y); }
 
         public void endRound()
         {
@@ -55,10 +52,7 @@ namespace Game.Manager
             {
                 int row = players[i].getRow();
                 int col = players[i].getCol();
-                if (map.getMap()[row, col] == true)
-                {
-                    players[i].setGameOver();
-                }
+                if (map.getMap()[row, col] == true) { players[i].setGameOver(); }
             }
 
             map.clearBoom();
