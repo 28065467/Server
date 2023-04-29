@@ -29,7 +29,8 @@ namespace Tile
             return ROW;
         }
 
-        public int getCOL() { 
+        public int getCOL() 
+        { 
             return COL;
         }
 

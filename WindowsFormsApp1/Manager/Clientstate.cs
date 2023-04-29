@@ -5,17 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Tile;
 
-namespace ClientState
+namespace Client.Manager
 {
-    internal class Clientstate
+    internal class ClientState
     {
         string name;
         int row;
         int col;
-        int booms; // 在client計算就好 之後刪掉
         bool gameover;
 
-        public Clientstate(string str)
+        public ClientState(string str)
         {
             name = str;
             gameover = false;
@@ -27,10 +26,6 @@ namespace ClientState
             else { row = 5; }
             if(num % 2 == 0) { col = 0; }
             else { col = 5; }
-
- //           if(total == 4) { booms = 3; }
- //           else if(total == 3) {  booms = 4; }
- //           else if(total == 2) { booms = 5; }
         }
 
         public string getName() { return name; }
