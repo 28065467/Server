@@ -121,10 +121,12 @@ namespace Game.Manager
                     }
                 }
             }
-            else { SendAll(message + "no winner;;"); }  // "GameEnd;no winner;;"
+            else { connection.SentToAllClient(message + "no winner;;"); }  // "GameEnd;no winner;;"
 
         }
 
+        #region Send
+        /*
         public void SendAll(string message)
         {
             foreach(ClientState player in Players)
@@ -149,5 +151,7 @@ namespace Game.Manager
                 }
             }
         }
+        */
+        #endregion
     }
 }
