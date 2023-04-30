@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Client.Manager;
 using Tile;
-
+using WindowsFormsApp1.Connection_Control;
 namespace Game.Manager
 {
     internal class GameManager
