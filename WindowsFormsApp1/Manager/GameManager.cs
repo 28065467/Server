@@ -31,9 +31,9 @@ namespace Game.Manager
         {
             for(int i = 0; i < players.Count; i++)
             {
-                int row = players[i].getRow();
-                int col = players[i].getCol();
-                if (map.getMap()[row, col] == true) { players[i].setGameOver(); }
+                int row = players[i].ROW;
+                int col = players[i].COL;
+                if (map.MAP[row, col] == true) { players[i].setGameOver(); }
             }
 
             map.clearBoom();

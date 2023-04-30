@@ -27,8 +27,9 @@ namespace Client.Manager
         }
 
         public void setLocation(int x, int y) { row = x; col = y; }
-        public int getRow() { return row; }
-        public int getCol() { return col; }
+        public int ROW { get { return row; } }
+        public int COL { get { return col; } }
+        public int COL { get { return col; } }
 
         public void setGameOver() { gameover = true; }
         public bool isGameOver() {  return gameover; }

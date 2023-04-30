@@ -9,8 +9,8 @@ namespace Tile
     internal class Map
     {
         bool[,] map;
-        int ROW;
-        int COL;
+        int row;
+        int col;
 
         public Map() { 
             map = new bool[6, 6]{
@@ -21,7 +21,7 @@ namespace Tile
                 { false, false, false, false, false, false },
                 { false, false, false, false, false, false }
             };
-            ROW = 6; COL = 6;
+            row = 6; col = 6;
         }
 
         public void setBoom(int x, int y)
@@ -40,19 +40,19 @@ namespace Tile
             }
         }
 
-        public bool[,] getMap()
+        public bool[,] MAP
         {
-            return map;
+            get { return map; }
         }
 
-        public int getROW()
+        public int ROW
         {
-            return ROW;
+            get { return row; }
         }
 
-        public int getCOL() 
-        { 
-            return COL;
+        public int COL 
+        {
+            get { return col; }
         }
 
     }
