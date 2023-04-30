@@ -24,10 +24,11 @@ namespace Tile
             row = 6; col = 6;
         }
 
-        public void setBoom(int x, int y)
-        {
-            map[x, y] = true;
-        }
+        public bool[,] MAP { get { return map; } }
+        public int ROW { get { return row; } }
+        public int COL { get { return col; } }
+
+        public void setBoom(int x, int y) { map[x, y] = true; }
 
         public void clearBoom()
         {
@@ -38,21 +39,6 @@ namespace Tile
                     map[i, j] = false;
                 }
             }
-        }
-
-        public bool[,] MAP
-        {
-            get { return map; }
-        }
-
-        public int ROW
-        {
-            get { return row; }
-        }
-
-        public int COL 
-        {
-            get { return col; }
         }
 
     }
