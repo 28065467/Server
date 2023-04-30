@@ -36,9 +36,5 @@ namespace Client.Manager
         public void setGameOver() { gameover = true; }
         public bool isGameOver { get { return gameover; } }
 
-        public void SendMessage(string message)
-        {
-
-        }
     }
 }
