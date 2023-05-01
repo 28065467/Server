@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Tile;
@@ -10,15 +12,17 @@ namespace Client.Manager
 {
     internal class ClientState
     {
-        string name;
-        int row;
-        int col;
-        bool gameover;
-
-        public ClientState(string name)
+        public string name;
+        public int row;
+        public int col;
+        public bool gameover;
+        public TcpClient tcpClient;
+        public ClientState(TcpClient client)
         {
-            this.name = name;
+            //this.name = name;
             gameover = false;
+            tcpClient = new TcpClient();
+            tcpClient = client;
         }
 
         public void setGame(int num)

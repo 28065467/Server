@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1.Connection_Control;
 using System.Net.Http.Headers;
+using Game.Manager;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public const int PORT = 8080;
+        public const int PORT = 10000;
         private Connection connection;
+        private GameManager gameManager;
         public Form1()
         {
             InitializeComponent();
@@ -26,9 +28,11 @@ namespace WindowsFormsApp1
             list_LOG.Items.Add("The Server is ready to start");
             connection = new Connection(this); // 建立 Connection 物件
         }
-        private void btn_GameSTART_Click(object sender, EventArgs e)
+        private void btn_GameSTART_Click(object sender, EventArgs e)// GameStart
         {
+            gameManager = new GameManager(this,connection);
         }
+
         private void button1_Click(object sender, EventArgs e) // Server Start
         {
             connection.Start_Connecting();

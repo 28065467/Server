@@ -6,21 +6,22 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.IO;
+using Client.Manager;
 
 namespace WindowsFormsApp1.Connection_Control
 {
     internal class Connection
     {
-        private Dictionary<int ,TcpClient> tcpClients;
+        public Dictionary<string ,ClientState> tcpClients;
         private Form1 form;
         private TcpListener listener;
         private Thread connectionThread;
         private int ID = 1;
         public Connection(Form1 form)
         {
-            tcpClients = new Dictionary<int, TcpClient>();
+            tcpClients = new Dictionary<string, ClientState>();
             this.form = form;
-            listener = new TcpListener(IPAddress.Parse(form.tbx_IP.Text), 8080);
+            listener = new TcpListener(IPAddress.Parse(form.tbx_IP.Text), 10000);
             IPEndPoint ipe = (IPEndPoint)listener.LocalEndpoint;
             form.ADD_TO_LOG("Listening At " + ipe.Address  + ":" + ipe.Port);
         }
@@ -56,9 +57,10 @@ namespace WindowsFormsApp1.Connection_Control
                 temp = listener.AcceptTcpClient();
                 if (temp.Connected)
                 {
-                    tcpClients.Add(ID,temp);
+                    tcpClients.Add(ID.ToString(),new ClientState(temp));
                     SentToSingleClient(ID, ID.ToString());
                     form.ADD_TO_LOG("Client " + ID + " :" + temp.Client.RemoteEndPoint + " is joined");
+                    //SentToSingleClient(ID,ID.ToString());
                     connectionThread = new Thread(Client_Listening);
                     connectionThread.IsBackground = true;
                     connectionThread.Start(temp);
@@ -102,15 +104,15 @@ namespace WindowsFormsApp1.Connection_Control
             byte[] data = Encoding.UTF8.GetBytes(Mesaage);
             foreach (var kvp in tcpClients)
             {
-                int Client_ID = kvp.Key;
-                TcpClient client = tcpClients[Client_ID];
+                string Client_ID = kvp.Key;
+                TcpClient client = tcpClients[Client_ID].tcpClient;
                 NetworkStream networkStream = client.GetStream();
                 try
                 {
                     if (networkStream.CanWrite)
                     {
                         networkStream.Write(data, 0, data.Length);
-                        form.ADD_TO_LOG("Message " + Mesaage + "is sent to Client " + Client_ID);
+                        //form.ADD_TO_LOG("Message " + Mesaage + " is sent to Client " + Client_ID);
                     }
                     else
                         form.ADD_TO_LOG("Fail to sent to Client " + Client_ID);
@@ -125,14 +127,14 @@ namespace WindowsFormsApp1.Connection_Control
         public void SentToSingleClient(int Client_ID, string Mesaage)
         {
             byte[] data = Encoding.UTF8.GetBytes(Mesaage);
-            TcpClient client = tcpClients[Client_ID];
+            TcpClient client = tcpClients[Client_ID.ToString()].tcpClient;
             NetworkStream networkStream = client.GetStream();
             try
             {
                 if (networkStream.CanWrite)
                 {
                     networkStream.Write(data, 0, data.Length);
-                    form.ADD_TO_LOG("Message " + Mesaage + "is sent to Client " + Client_ID);
+                    //form.ADD_TO_LOG("Message " + Mesaage + " is sent to Client " + Client_ID);
                 }
                 else
                     form.ADD_TO_LOG("Fail to sent to Client " + Client_ID);
