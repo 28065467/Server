@@ -115,8 +115,8 @@ namespace Game.Manager
                 {
                     if (!player.isGameOver) 
                     {
-                        message += player.Name + ";;";
-                        connection.SentToAllClient(message);   // "GameEnd;player.Name;;"
+                        message += player.ID + ";;";
+                        connection.SentToAllClient(message);   // "GameEnd;player.ID;;"
                         break; 
                     }
                 }

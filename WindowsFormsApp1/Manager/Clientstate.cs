@@ -9,14 +9,14 @@ namespace Client.Manager
 {
     internal class ClientState
     {
-        string name;
+        string id;
         int row;
         int col;
         bool gameover;
 
-        public ClientState(string name)
+        public ClientState(string id)
         {
-            this.name = name;
+            this.id = id;
             gameover = false;
         }
 
@@ -29,7 +29,7 @@ namespace Client.Manager
         }
 
         public void setLocation(int x, int y) { row = x; col = y; }
-        public string Name { get { return name; } }
+        public string ID { get { return id; } }
         public int ROW { get { return row; } }
         public int COL { get { return col; } }
 
