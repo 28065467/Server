@@ -57,23 +57,22 @@ namespace WindowsFormsApp1.Connection_Control
                 temp = listener.AcceptTcpClient();
                 if (temp.Connected)
                 {
-                    tcpClients.Add(ID.ToString(),new ClientState(temp));
+                    tcpClients.Add(ID.ToString(),new ClientState(temp, ID));
                     SentToSingleClient(ID, ID.ToString());
                     form.ADD_TO_LOG("Client " + ID + " :" + temp.Client.RemoteEndPoint + " is joined");
                     //SentToSingleClient(ID,ID.ToString());
-                    connectionThread = new Thread(Client_Listening);
+                    /*connectionThread = new Thread(Client_Listening);
                     connectionThread.IsBackground = true;
-                    connectionThread.Start(temp);
+                    connectionThread.Start(temp);*/
                     ID++;
                 }
             }
         }
-        private void Client_Listening(object clientObj)
+        /*private void Client_Listening(object clientObj)
         {
             TcpClient listeningSoc = (TcpClient)clientObj;
-            NetworkStream networkStream = listeningSoc.GetStream(); 
-            //listeningSoc.Blocking = false;
-            //Thread listeningThread = client_thread;
+            NetworkStream networkStream = listeningSoc.GetStream();
+            
             while (true)
             {
                 try
@@ -98,7 +97,7 @@ namespace WindowsFormsApp1.Connection_Control
                     form.ADD_TO_LOG("Error : " + ex.Message);
                 }
             }
-        }
+        }*/
         public void SentToAllClient(string Mesaage)
         {
             byte[] data = Encoding.UTF8.GetBytes(Mesaage);

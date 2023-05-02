@@ -18,16 +18,16 @@ namespace Game.Manager
         Map map;
         //Dictionary<string,ClientState> Players;
         Form1 form;
-        Connection connection;
+        public Connection connection;
         public GameManager(Form1 form, Connection connection)
         {
             this.form = form;
             this.connection = connection;
             map = new Map();
             //Players = new Dictionary<string, ClientState>();
-            this.connection = connection;
         }
 
+        #region Add Players
         /*public void addPlayers(ClientState player)
         {
             string message = "addPlayers;" ;
@@ -36,50 +36,51 @@ namespace Game.Manager
             message += index.ToString() + ";;";
             Send(message, index);   // "addPlayers;index;;" 通知此玩家編號
         }*/
+        #endregion
 
-        public bool GameStartSet()
+        public bool GameStartSet()  // GS
         {
-            string message = "GameStartSet;";
+            string message = "GS;";
             if(connection.tcpClients.Count == 0 || connection.tcpClients.Count == 1)
             {
-                connection.SentToAllClient(message + "-1;;"); // "GameStartSet;-1;;"   -1為玩家人數不足
+                connection.SentToAllClient(message + "-;;"); // "GS;-;;"   玩家人數不足
                 return false;
             }
 
-            for(int i = 1 ; i < connection.tcpClients.Count; i++)
+            for(int i = 1 ; i <= connection.tcpClients.Count; i++)
             {
-                connection.tcpClients[i.ToString()].setGame(i);
-                connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");  // "GameStartSet;i;row col;"
+                connection.tcpClients[i.ToString()].setGame();
+                connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");  // "GS;i;row col;" 玩家i所在座標
             }
             round = 1;
             return true;
         }
 
-        public void NewRound()
+        public void NewRound()  // NR
         {
-            string message = "NewRound;";
+            string message = "NR;";
             round++;
-            connection.SentToAllClient(message + "-1;" + round.ToString() + ";");  // "NewRound;-1;round;" -1為回數通知
+            connection.SentToAllClient(message + "-;" + round.ToString() + ";");  // "NR;-;round;"    此輪為第round回
             for(int i = 0; i < connection.tcpClients.Count; i++)
             {
                 if (connection.tcpClients[i.ToString()].isGameOver)
                 {
                     // 向所有玩家回傳此玩家已淘汰
-                    connection.SentToAllClient(message + i.ToString() + ";" + "-1;"); // "NewRound;i;-1;"  -1為淘汰
+                    connection.SentToAllClient(message + i.ToString() + ";" + "-;"); // "NR;i;-;"  玩家i已淘汰
                 }
                 else
                 {
                     // 向所有玩家回傳此未淘汰玩家位置
-                    connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");   // "NewRound;i;row col;"
+                    connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");   // "NR;i;row col;"    玩家i在新一局的座標
                 }
             }
         }
 
         public void setBoom(int x, int y) { map.setBoom(x, y); }
 
-        public void EndRound()
+        public void EndRound()  // ER   此輪結束
         {
-            string message = "EndRound;";
+            string message = "ER;";
             for(int i = 0; i < connection.tcpClients.Count; i++)
             {
                 int row = connection.tcpClients[i.ToString()].ROW;
@@ -87,14 +88,14 @@ namespace Game.Manager
                 if (map.MAP[row, col] == true)
                 {
                     connection.tcpClients[i.ToString()].setGameOver();
-                    connection.SentToAllClient(message + i.ToString() + ";;");  // "EndRound;i;;"
+                    connection.SentToAllClient(message + i.ToString() + ";;");  // "ER;i;;" 玩家i被炸彈炸到了
                 }
             }
             map.clearBoom();
             CheckNewRound();
         }
 
-        public void CheckNewRound()
+        public void CheckNewRound() // 檢查是否能進入下一局遊戲
         {
             int loser = 0;
             foreach (var kvp in connection.tcpClients)
@@ -109,9 +110,9 @@ namespace Game.Manager
             else { NewRound(); }
         }
 
-        public void GameEnd(bool win)
+        public void GameEnd(bool win)   // GE   遊戲結束
         {
-            string message = "GameEnd;";
+            string message = "GE;";
             if (win)
             {
                 foreach (var kvp in connection.tcpClients)
@@ -120,16 +121,17 @@ namespace Game.Manager
                     ClientState clientState = kvp.Value;
                     if (!(clientState.isGameOver)) 
                     {
-                        message += (clientState.Name) + ";;";
-                        connection.SentToAllClient(message);   // "GameEnd;player.Name;;"
+                        message += client_ID + ";;";
+                        connection.SentToAllClient(message);   // "GE;client_ID;;"  玩家ID獲勝
                         break; 
                     }
                 }
             }
-            else { connection.SentToAllClient(message + "no winner;;"); }  // "GameEnd;no winner;;"
+            else { connection.SentToAllClient(message + "N;;"); }  // "GE;N;;"  玩家全軍覆沒
 
         }
 
+        #region Send
         /*public void SendAll(string message)
         {
             foreach(ClientState player in Players)
@@ -154,5 +156,6 @@ namespace Game.Manager
                 }
             }
         }*/
+        #endregion
     }
 }
