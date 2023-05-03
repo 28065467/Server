@@ -31,6 +31,8 @@ namespace WindowsFormsApp1
         private void btn_GameSTART_Click(object sender, EventArgs e)// GameStart
         {
             gameManager = new GameManager(this,connection);
+
+            gameManager.GameStartSet();
         }
 
         private void button1_Click(object sender, EventArgs e) // Server Start

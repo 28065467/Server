@@ -40,17 +40,17 @@ namespace Game.Manager
 
         public bool GameStartSet()  // GS
         {
-            string message = "GS;";
             if(connection.tcpClients.Count == 0 || connection.tcpClients.Count == 1)
             {
-                connection.SentToAllClient(message + "-;;"); // "GS;-;;"   玩家人數不足
+                //o0l9o0connection.SentToAllClient(message + "-;;"); // "GS;-;;"   玩家人數不足
                 return false;
             }
 
+                connection.SentToAllClient("GS");
             for(int i = 1 ; i <= connection.tcpClients.Count; i++)
             {
                 connection.tcpClients[i.ToString()].setGame();
-                connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");  // "GS;i;row col;" 玩家i所在座標
+                connection.SentToAllClient("PL" + i.ToString() + connection.tcpClients[i.ToString()].ROW.ToString()+ connection.tcpClients[i.ToString()].COL.ToString());  // "PLiXY;" 玩家i所在座標
             }
             round = 1;
             return true;
@@ -58,20 +58,19 @@ namespace Game.Manager
 
         public void NewRound()  // NR
         {
-            string message = "NR;";
             round++;
-            connection.SentToAllClient(message + "-;" + round.ToString() + ";");  // "NR;-;round;"    此輪為第round回
+            connection.SentToAllClient("NR"+round.ToString());  // "NR;-;round;"    此輪為第round回
             for(int i = 0; i < connection.tcpClients.Count; i++)
             {
                 if (connection.tcpClients[i.ToString()].isGameOver)
                 {
                     // 向所有玩家回傳此玩家已淘汰
-                    connection.SentToAllClient(message + i.ToString() + ";" + "-;"); // "NR;i;-;"  玩家i已淘汰
+                    //應該沒必要connection.SentToAllClient(PO); // "NR;i;-;"  玩家i已淘汰
                 }
                 else
                 {
                     // 向所有玩家回傳此未淘汰玩家位置
-                    connection.SentToAllClient(message + i.ToString() + ";" + connection.tcpClients[i.ToString()].ROW.ToString() + " " + connection.tcpClients[i.ToString()].COL.ToString() + ";");   // "NR;i;row col;"    玩家i在新一局的座標
+                    connection.SentToAllClient("PL" + i.ToString() + connection.tcpClients[i.ToString()].ROW.ToString() + connection.tcpClients[i.ToString()].COL.ToString() + ";");   // "PLiXY"    玩家i在新一局的座標
                 }
             }
         }
@@ -88,7 +87,7 @@ namespace Game.Manager
                 if (map.MAP[row, col] == true)
                 {
                     connection.tcpClients[i.ToString()].setGameOver();
-                    connection.SentToAllClient(message + i.ToString() + ";;");  // "ER;i;;" 玩家i被炸彈炸到了
+                    connection.SentToAllClient("PO"+ i.ToString());  // "POi" 玩家i被炸彈炸到了 PO stands for PlayerOut
                 }
             }
             map.clearBoom();
@@ -121,13 +120,12 @@ namespace Game.Manager
                     ClientState clientState = kvp.Value;
                     if (!(clientState.isGameOver)) 
                     {
-                        message += client_ID + ";;";
-                        connection.SentToAllClient(message);   // "GE;client_ID;;"  玩家ID獲勝
+                        connection.SentToAllClient("GE"+client_ID);   // "GEclient_ID"  玩家ID獲勝
                         break; 
                     }
                 }
             }
-            else { connection.SentToAllClient(message + "N;;"); }  // "GE;N;;"  玩家全軍覆沒
+            else { connection.SentToAllClient("AD"); }  // "AD"  玩家全軍覆沒 AD for ALL DEAD
 
         }
 
