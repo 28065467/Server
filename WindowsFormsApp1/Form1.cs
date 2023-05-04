@@ -18,6 +18,7 @@ namespace WindowsFormsApp1
         public const int PORT = 10000;
         private Connection connection;
         private GameManager gameManager;
+        public System.Timers.Timer timer;
         public Form1()
         {
             InitializeComponent();
@@ -31,8 +32,10 @@ namespace WindowsFormsApp1
         private void btn_GameSTART_Click(object sender, EventArgs e)// GameStart
         {
             gameManager = new GameManager(this,connection);
-
+            timer = new System.Timers.Timer(600000);
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(gameManager.Gameloop);
             gameManager.GameStartSet();
+
         }
 
         private void button1_Click(object sender, EventArgs e) // Server Start

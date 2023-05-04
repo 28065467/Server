@@ -19,6 +19,8 @@ namespace Game.Manager
         //Dictionary<string,ClientState> Players;
         Form1 form;
         public Connection connection;
+        bool Stop = false;
+        bool ALL_DEAD = false;
         public GameManager(Form1 form, Connection connection)
         {
             this.form = form;
@@ -55,7 +57,21 @@ namespace Game.Manager
             round = 1;
             return true;
         }
-
+        public void Gameloop(object source , System.Timers.ElapsedEventArgs e)
+        {
+            NewRound();
+            EndRound();
+            CheckNewRound();
+            if (Stop)
+            {
+                if(ALL_DEAD)
+                    GameEnd(false);
+                else
+                    GameEnd(true);
+                form.timer.Stop();
+                form.Close();
+            }
+        }
         public void NewRound()  // NR
         {
             round++;
@@ -91,7 +107,7 @@ namespace Game.Manager
                 }
             }
             map.clearBoom();
-            CheckNewRound();
+            //CheckNewRound();
         }
 
         public void CheckNewRound() // 檢查是否能進入下一局遊戲
@@ -104,9 +120,16 @@ namespace Game.Manager
                 if (clientState.isGameOver) { loser++; }
             }
 
-            if (loser == connection.tcpClients.Count - 1) { GameEnd(true); }
-            else if(loser == connection.tcpClients.Count) { GameEnd(false); }
-            else { NewRound(); }
+            if (loser == connection.tcpClients.Count - 1) {
+                //GameEnd(true);
+                Stop = true;
+            }
+            else if(loser == connection.tcpClients.Count) {
+                //GameEnd(false);
+                ALL_DEAD = true;
+                Stop = true;
+            }
+            //else { NewRound(); }
         }
 
         public void GameEnd(bool win)   // GE   遊戲結束
