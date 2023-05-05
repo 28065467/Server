@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btn_ServerStart = new System.Windows.Forms.Button();
             this.list_LOG = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -45,10 +46,10 @@
             // 
             // btn_ServerStart
             // 
-            this.btn_ServerStart.Location = new System.Drawing.Point(57, 28);
-            this.btn_ServerStart.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_ServerStart.Location = new System.Drawing.Point(124, 56);
+            this.btn_ServerStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_ServerStart.Name = "btn_ServerStart";
-            this.btn_ServerStart.Size = new System.Drawing.Size(81, 41);
+            this.btn_ServerStart.Size = new System.Drawing.Size(176, 82);
             this.btn_ServerStart.TabIndex = 0;
             this.btn_ServerStart.Text = "Server START";
             this.btn_ServerStart.UseVisualStyleBackColor = true;
@@ -57,11 +58,11 @@
             // list_LOG
             // 
             this.list_LOG.FormattingEnabled = true;
-            this.list_LOG.ItemHeight = 12;
-            this.list_LOG.Location = new System.Drawing.Point(11, 109);
-            this.list_LOG.Margin = new System.Windows.Forms.Padding(2);
+            this.list_LOG.ItemHeight = 24;
+            this.list_LOG.Location = new System.Drawing.Point(24, 218);
+            this.list_LOG.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.list_LOG.Name = "list_LOG";
-            this.list_LOG.Size = new System.Drawing.Size(504, 328);
+            this.list_LOG.Size = new System.Drawing.Size(1087, 652);
             this.list_LOG.TabIndex = 1;
             this.list_LOG.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -74,10 +75,10 @@
             // 
             // btn_GameSTART
             // 
-            this.btn_GameSTART.Location = new System.Drawing.Point(183, 28);
-            this.btn_GameSTART.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_GameSTART.Location = new System.Drawing.Point(396, 56);
+            this.btn_GameSTART.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_GameSTART.Name = "btn_GameSTART";
-            this.btn_GameSTART.Size = new System.Drawing.Size(81, 41);
+            this.btn_GameSTART.Size = new System.Drawing.Size(176, 82);
             this.btn_GameSTART.TabIndex = 5;
             this.btn_GameSTART.Text = "Game \r\nSTART";
             this.btn_GameSTART.UseVisualStyleBackColor = true;
@@ -85,10 +86,10 @@
             // 
             // btn_EXIT
             // 
-            this.btn_EXIT.Location = new System.Drawing.Point(294, 28);
-            this.btn_EXIT.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_EXIT.Location = new System.Drawing.Point(637, 56);
+            this.btn_EXIT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_EXIT.Name = "btn_EXIT";
-            this.btn_EXIT.Size = new System.Drawing.Size(81, 41);
+            this.btn_EXIT.Size = new System.Drawing.Size(176, 82);
             this.btn_EXIT.TabIndex = 7;
             this.btn_EXIT.Text = "EXIT";
             this.btn_EXIT.UseVisualStyleBackColor = true;
@@ -97,11 +98,11 @@
             // list_Recv
             // 
             this.list_Recv.FormattingEnabled = true;
-            this.list_Recv.ItemHeight = 12;
-            this.list_Recv.Location = new System.Drawing.Point(519, 109);
-            this.list_Recv.Margin = new System.Windows.Forms.Padding(2);
+            this.list_Recv.ItemHeight = 24;
+            this.list_Recv.Location = new System.Drawing.Point(1124, 218);
+            this.list_Recv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.list_Recv.Name = "list_Recv";
-            this.list_Recv.Size = new System.Drawing.Size(465, 328);
+            this.list_Recv.Size = new System.Drawing.Size(1003, 652);
             this.list_Recv.TabIndex = 8;
             this.list_Recv.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged_1);
             // 
@@ -109,9 +110,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label1.Location = new System.Drawing.Point(167, 91);
+            this.label1.Location = new System.Drawing.Point(362, 182);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 16);
+            this.label1.Size = new System.Drawing.Size(184, 32);
             this.label1.TabIndex = 9;
             this.label1.Text = "Server Log";
             // 
@@ -119,9 +121,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label2.Location = new System.Drawing.Point(694, 91);
+            this.label2.Location = new System.Drawing.Point(1504, 182);
+            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 16);
+            this.label2.Size = new System.Drawing.Size(286, 32);
             this.label2.TabIndex = 10;
             this.label2.Text = "Recevied Message";
             // 
@@ -129,9 +132,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(534, 15);
+            this.label3.Location = new System.Drawing.Point(1157, 30);
+            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 16);
+            this.label3.Size = new System.Drawing.Size(167, 32);
             this.label3.TabIndex = 11;
             this.label3.Text = "Server IP";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -140,31 +144,34 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("標楷體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(516, 59);
+            this.label4.Location = new System.Drawing.Point(1118, 118);
+            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 16);
+            this.label4.Size = new System.Drawing.Size(201, 32);
             this.label4.TabIndex = 12;
             this.label4.Text = "Server PORT";
             // 
             // tbx_IP
             // 
-            this.tbx_IP.Location = new System.Drawing.Point(646, 15);
+            this.tbx_IP.Location = new System.Drawing.Point(1400, 30);
+            this.tbx_IP.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbx_IP.Name = "tbx_IP";
-            this.tbx_IP.Size = new System.Drawing.Size(100, 22);
+            this.tbx_IP.Size = new System.Drawing.Size(212, 36);
             this.tbx_IP.TabIndex = 13;
             // 
             // tbx_PORT
             // 
-            this.tbx_PORT.Location = new System.Drawing.Point(646, 53);
+            this.tbx_PORT.Location = new System.Drawing.Point(1400, 106);
+            this.tbx_PORT.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbx_PORT.Name = "tbx_PORT";
-            this.tbx_PORT.Size = new System.Drawing.Size(100, 22);
+            this.tbx_PORT.Size = new System.Drawing.Size(212, 36);
             this.tbx_PORT.TabIndex = 14;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1018, 448);
+            this.ClientSize = new System.Drawing.Size(2206, 896);
             this.Controls.Add(this.tbx_PORT);
             this.Controls.Add(this.tbx_IP);
             this.Controls.Add(this.label4);
@@ -176,9 +183,10 @@
             this.Controls.Add(this.btn_GameSTART);
             this.Controls.Add(this.list_LOG);
             this.Controls.Add(this.btn_ServerStart);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Bomb Game Server";
             this.ResumeLayout(false);
             this.PerformLayout();
 
